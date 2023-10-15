@@ -1,16 +1,16 @@
-﻿using Graphql.Api.Entities;
+﻿using Database;
+
+using Graphql.Api.Entities;
 
 namespace Graphql.Api.Queries
 {
 	public class Query
 	{
-		public Portfolio GetPortfolio()
+		[UseProjection]
+		public IQueryable<Portfolio> GetPortfolios(
+			ApplicationDbContext dbContext)
 		{
-			return new Portfolio()
-			{
-				Id = Guid.NewGuid(),
-				Name = "Test Portfolio"
-			};
+			return dbContext.Portfolios;
 		}
 	}
 }

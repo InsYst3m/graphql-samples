@@ -1,3 +1,5 @@
+using Database.Extensions;
+
 using Graphql.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,10 +10,10 @@ IConfiguration configuration = builder.Configuration;
 
 IServiceCollection services = builder.Services;
 
+services.AddDatabaseLayer();
 services.AddGraphQLServer(configuration);
 
 #endregion
-
 
 #region Configure Middleware
 

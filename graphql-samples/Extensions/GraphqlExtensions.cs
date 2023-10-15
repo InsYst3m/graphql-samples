@@ -1,4 +1,6 @@
-﻿using Graphql.Api.Mutations;
+﻿using Database;
+
+using Graphql.Api.Mutations;
 using Graphql.Api.Queries;
 using Graphql.Api.Subscriptions;
 
@@ -26,10 +28,12 @@ namespace Graphql.Api.Extensions
 				{
 
 				})
+				.RegisterDbContext<ApplicationDbContext>(DbContextKind.Pooled)
 				.AddQueryType<Query>()
 				.AddMutationType<Mutation>()
 				.AddSubscriptionType<Subscription>()
 				.AddMutationConventions()
+				.AddProjections()
 				.AddInMemorySubscriptions()
 				.InitializeOnStartup();
 

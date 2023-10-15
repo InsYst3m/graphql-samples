@@ -1,4 +1,6 @@
-﻿using Graphql.Api.Entities;
+﻿using Database;
+
+using Graphql.Api.Entities;
 using Graphql.Api.Models.Mutations.Inputs;
 using Graphql.Api.Models.Mutations.Payloads;
 using Graphql.Api.Models.Subscriptions;
@@ -11,15 +13,18 @@ namespace Graphql.Api.Mutations
 	public class Mutation
 	{
 		public async Task<CreatePortfolioPayload> CreatePortfolioAsync(
-			CreatePortfolioInput input,
+			ApplicationDbContext dbContext,
 			ITopicEventSender eventSender,
+			CreatePortfolioInput input,
 			CancellationToken cancellationToken)
 		{
 			Portfolio portfolio = new()
 			{
-				Id = Guid.NewGuid(),
 				Name = input.Name
 			};
+
+			await dbContext.Portfolios.AddAsync(portfolio, cancellationToken);
+			await dbContext.SaveChangesAsync(cancellationToken);
 
 			await eventSender.SendAsync(
 				nameof(Subscription.OnPortfolioCreated),
