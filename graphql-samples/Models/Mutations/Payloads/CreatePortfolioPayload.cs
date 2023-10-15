@@ -2,7 +2,7 @@
 
 namespace Graphql.Api.Models.Mutations.Payloads
 {
-	public class CreatePortfolioPayload
+	public sealed class CreatePortfolioPayload
 	{
 		public required Portfolio Portfolio { get; set; }
 	}

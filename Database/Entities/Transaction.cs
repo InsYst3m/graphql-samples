@@ -10,6 +10,21 @@ namespace Graphql.Api.Entities
 	{
 		[Required]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public required Guid Id { get; set; }
+		public Guid Id { get; set; }
+
+		[Required]
+		public required Guid PortfolioId { get; set; }
+
+		[ForeignKey(nameof(PortfolioId))]
+		public Portfolio? Portfolio { get; set; }
+
+		[Required]
+		public required Guid AssetId { get; set; }
+
+		[ForeignKey(nameof(AssetId))]
+		public Asset? Asset { get; set; }
+
+		public required decimal Amount { get; set; }
+		public required decimal BuyPriceUsd { get; set; }
 	}
 }

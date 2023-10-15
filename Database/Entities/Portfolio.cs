@@ -14,5 +14,7 @@ namespace Graphql.Api.Entities
 
 		[Required]
 		public required string Name { get; set; }
+
+		public List<Transaction> Transactions { get; set; } = new();
 	}
 }

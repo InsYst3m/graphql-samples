@@ -12,5 +12,12 @@ namespace Graphql.Api.Queries
 		{
 			return dbContext.Portfolios;
 		}
+
+		[UseProjection]
+		public IQueryable<Asset> GetAssets(
+			ApplicationDbContext dbContext)
+		{
+			return dbContext.Assets;
+		}
 	}
 }
